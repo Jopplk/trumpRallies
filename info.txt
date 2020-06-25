@@ -1,5 +1,7 @@
 Tools:
     https://wikitable2csv.ggor.de/
+    nominatim.openstreetmap.org
+        For geotagging
 Data:
     Pulled 2020-6-20
     postElection/: https://en.wikipedia.org/wiki/List_of_post-election_Donald_Trump_rallies#References
