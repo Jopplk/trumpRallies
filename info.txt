@@ -1,0 +1,6 @@
+Tools:
+    https://wikitable2csv.ggor.de/
+Data:
+    Pulled 2020-6-20
+    postElection/: https://en.wikipedia.org/wiki/List_of_post-election_Donald_Trump_rallies#References
+    2016Campaign/: https://en.wikipedia.org/wiki/List_of_rallies_for_the_2016_Donald_Trump_presidential_campaign
