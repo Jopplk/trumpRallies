@@ -41,3 +41,21 @@ def geocode_df(df, geocoderObj):
 
 geocode_df(data2016, geocoder)
 geocode_df(dataPost, geocoder)
+
+
+#Special cases ----------------------
+def agg(dfFile, column):
+    data = pd.read_csv(dfFile)
+    aggData = data.groupby(column)[column].count()
+
+    return aggData
+
+
+def fix(df, index, geoObj):
+    # [:8] for Bangor, [:10] for Portland
+    data = geoObj.geocode(df.at[index, 'concatAddress'][:10] + 'Maine')
+    df.at[index, 'location'] = str(data)
+    df.at[index, 'point'] = tuple(data.point)
+    df.at[index, 'finalAddress'] = data.address
+    df.at[index, 'latitude'] = tuple(data.point)[0]
+    df.at[index, 'longitude'] = tuple(data.point)[1]
