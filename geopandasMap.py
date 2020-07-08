@@ -4,6 +4,7 @@ import matplotlib
 import matplotlib.pyplot as plt
 
 
+# Getting rally occurances data
 def agg(dfFile):
     data = pd.read_csv(dfFile)
     aggData = data.groupby('State')['Venue'].count()
@@ -11,23 +12,23 @@ def agg(dfFile):
     return aggData
 
 
-path = 'data/us-states.json'
-
-mapShape = gpd.read_file(path)
-
 data2016agg = agg('data/2016Campaign/data2016.csv')
 dataPostagg = agg('data/postElection/dataPost.csv')
 
 bothAgg = data2016agg.combine(
     dataPostagg, lambda x, y: x + y, fill_value=0)
 
-#bothAgg = bothAgg.rename(columns={'State': 'name'})
+# Getting and cleaning map shape data
+path = 'data/us-states.json'
+mapShape = gpd.read_file(path)
 
 mapShape = mapShape.set_index('name')
 mapShape = mapShape.drop(['AK', 'HI', 'PR'])
 
+# Combining data
 mapShape['occurances'] = bothAgg
 mapShape = mapShape.fillna(0)
+
 
 ### Begin Map plotting ###
 # figsize=(x_inches, y_inches)
