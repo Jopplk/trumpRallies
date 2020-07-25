@@ -62,7 +62,7 @@ def choroplethMap(filename, kwargs):
 
 
 mapSettings = dict(
-    tiles='OpenStreetMap',
+    tiles='cartodbpositron',
     location=[39.8283, -98.5795],
     zoom_start=4.75)
 

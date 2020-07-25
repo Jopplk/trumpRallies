@@ -4,8 +4,8 @@ from geopy.geocoders import Nominatim
 from geopy.extra.rate_limiter import RateLimiter
 
 
-PATH_2016 = 'data/2016Campaign/'
-PATH_POST = 'data/postElection/'
+PATH_2016 = 'data/2016Campaign/raw/'
+PATH_POST = 'data/postElection/raw/'
 
 
 def collectData(folderPath):
