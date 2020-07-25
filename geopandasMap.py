@@ -1,5 +1,6 @@
 import geopandas as gpd
 import pandas as pd
+import numpy as np
 import matplotlib as mpl
 import matplotlib.pyplot as plt
 
@@ -41,20 +42,23 @@ mapShape['occurances'] = bothAgg
 # DPI will control final export resolution
 fig, ax = plt.subplots(1, figsize=(8, 5))
 
-colors = 'Reds'
-
 ax.axis('off')
 ax.set_aspect('equal')
-ax.set_title('# of Trump Rallies', )
+ax.set_title('# of Trump Rallies', fontsize=18)
 
 # Create colorbar
-nomalizeObj = mpl.colors.Normalize(
-    vmin=mapShape['occurances'].min(),
-    vmax=mapShape['occurances'].max())
-fig.colorbar(mpl.cm.ScalarMappable(
-    norm=nomalizeObj,
-    cmap=colors))
+segs = 8
+colors = plt.cm.get_cmap('OrRd', segs)
 
+mappable = mpl.cm.ScalarMappable(cmap=colors)
+mappable.set_array([])
+mappable.set_clim(-0.5, segs + 0.5)  # Controlls tick positioning
+cbar = fig.colorbar(mappable)
+
+cbar.set_ticks(np.linspace(0, segs, segs))
+cbar.set_ticklabels([5, 10, 15, 20, 25, 30, 35, 40])
+
+# Create plots
 mapShape.plot(
     missing_kwds={'color': 'lightgrey'},
     ax=ax,
@@ -65,11 +69,11 @@ mapShape.plot(
 
 geoRallyPoints.plot(
     ax=ax,
-    alpha=.5,
+    alpha=.75,
     marker='o',
-    color='green',
-    markersize=.8)
+    color='grey',
+    markersize=26)
 
 plt.show()
 
-# fig.savefig("map.png", dpi=500)
+fig.savefig("map.png", dpi=500)

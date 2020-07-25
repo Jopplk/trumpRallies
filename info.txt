@@ -6,3 +6,8 @@ Data:
     Pulled 2020-6-20
     postElection/: https://en.wikipedia.org/wiki/List_of_post-election_Donald_Trump_rallies#References
     2016Campaign/: https://en.wikipedia.org/wiki/List_of_rallies_for_the_2016_Donald_Trump_presidential_campaign
+
+foliumMap.py inspired by - https://towardsdatascience.com/making-3-easy-maps-with-python-fb7dfb1036
+
+Next to Work on:
+    https://towardsdatascience.com/lets-make-a-map-using-geopandas-pandas-and-matplotlib-to-make-a-chloropleth-map-dddc31c1983d
