@@ -1,3 +1,6 @@
+# Creates two folium maps
+# One point map showing all trump rallies
+# One choropleth map by state
 import pandas as pd
 import folium
 from folium.features import Choropleth
