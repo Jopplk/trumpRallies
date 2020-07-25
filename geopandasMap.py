@@ -3,6 +3,7 @@ import pandas as pd
 import numpy as np
 import matplotlib as mpl
 import matplotlib.pyplot as plt
+from mpl_toolkits.axes_grid1 import make_axes_locatable
 
 
 # Getting rally data
@@ -40,23 +41,37 @@ mapShape['occurances'] = bothAgg
 ### Begin Map plotting ###
 # figsize=(x_inches, y_inches)
 # DPI will control final export resolution
+
+# Style Declerations
+plt.rcParams["font.family"] = "Nirmala UI"
+textcolor = '2e2e2e'
+plt.rcParams['text.color'] = textcolor
+plt.rcParams['axes.labelcolor'] = textcolor
+plt.rcParams['xtick.color'] = textcolor
+plt.rcParams['ytick.color'] = textcolor
+
 fig, ax = plt.subplots(1, figsize=(8, 5))
 
 ax.axis('off')
 ax.set_aspect('equal')
-ax.set_title('# of Trump Rallies', fontsize=18)
+ax.set_title('Number of Trump Rallies by State',
+             fontsize=36)
 
 # Create colorbar
+divider = make_axes_locatable(ax)
+cax = divider.append_axes("bottom", size="3.5%", pad=0.05)
+
 segs = 8
 colors = plt.cm.get_cmap('OrRd', segs)
 
 mappable = mpl.cm.ScalarMappable(cmap=colors)
 mappable.set_array([])
 mappable.set_clim(-0.5, segs + 0.5)  # Controlls tick positioning
-cbar = fig.colorbar(mappable)
+cbar = fig.colorbar(mappable, cax=cax, orientation='horizontal')
 
 cbar.set_ticks(np.linspace(0, segs, segs))
 cbar.set_ticklabels([5, 10, 15, 20, 25, 30, 35, 40])
+cbar.ax.tick_params(labelsize=16)
 
 # Create plots
 mapShape.plot(
@@ -76,4 +91,4 @@ geoRallyPoints.plot(
 
 plt.show()
 
-fig.savefig("map.png", dpi=500)
+fig.savefig("map.png", dpi=300)
